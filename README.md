@@ -1,5 +1,4 @@
-# Data Platform
-
+# DTHEINFRA
 End-to-end data platform with Lambda architecture (batch + streaming), built on AWS with a Lakehouse foundation (S3 + Apache Iceberg).
 
 ## Tech Stack
