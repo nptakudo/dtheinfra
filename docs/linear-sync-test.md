@@ -13,6 +13,7 @@ This document records a test of the Linear-GitHub integration sync functionality
 ## Test Purpose
 
 Verify that the Linear-GitHub integration properly syncs:
+
 - Issue creation from Linear to GitHub
 - Comments between Linear and GitHub
 - Branch name requirements (must include issue identifier)
