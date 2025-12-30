@@ -1,0 +1,44 @@
+# Kafka Configuration - Base Defaults
+kafka:
+  # Connection settings
+  bootstrap_servers: "${DP_KAFKA_BOOTSTRAP_SERVERS:localhost:29092}"
+  schema_registry_url: "${DP_KAFKA_SCHEMA_REGISTRY_URL:http://localhost:8081}"
+  security_protocol: "PLAINTEXT"
+
+  # Topics configuration
+  topics:
+    events_raw:
+      name: "events.raw"
+      partitions: 12
+      replication_factor: 1
+      retention_ms: 604800000  # 7 days
+
+    events_processed:
+      name: "events.processed"
+      partitions: 6
+      replication_factor: 1
+      retention_ms: 2592000000  # 30 days
+
+    events_dlq:
+      name: "events.dlq"
+      partitions: 3
+      replication_factor: 1
+      retention_ms: 2592000000  # 30 days
+
+  # Producer defaults
+  producer:
+    acks: "all"
+    retries: 3
+    batch_size: 16384
+    linger_ms: 5
+    compression_type: "lz4"
+    enable_idempotence: true
+    max_in_flight_requests: 5
+
+  # Consumer defaults
+  consumer:
+    auto_offset_reset: "earliest"
+    enable_auto_commit: false
+    max_poll_records: 500
+    session_timeout_ms: 30000
+    heartbeat_interval_ms: 10000

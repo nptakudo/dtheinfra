@@ -1,0 +1,126 @@
+{
+  "type": "record",
+  "name": "UserEvent",
+  "namespace": "com.dataplatform.events",
+  "doc": "Represents a user interaction event in the data platform",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": "string",
+      "doc": "Unique identifier for the event (UUID)"
+    },
+    {
+      "name": "event_type",
+      "type": {
+        "type": "enum",
+        "name": "EventType",
+        "symbols": ["PAGE_VIEW", "CLICK", "PURCHASE", "SIGNUP", "LOGIN", "LOGOUT", "SEARCH", "ADD_TO_CART", "REMOVE_FROM_CART", "CHECKOUT"]
+      },
+      "doc": "Type of user event"
+    },
+    {
+      "name": "user_id",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "User identifier (null for anonymous users)"
+    },
+    {
+      "name": "session_id",
+      "type": "string",
+      "doc": "Session identifier for tracking user journey"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Event timestamp in milliseconds since epoch"
+    },
+    {
+      "name": "properties",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "default": {},
+      "doc": "Additional event properties as key-value pairs"
+    },
+    {
+      "name": "context",
+      "type": {
+        "type": "record",
+        "name": "EventContext",
+        "fields": [
+          {
+            "name": "page_url",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "URL of the page where event occurred"
+          },
+          {
+            "name": "referrer",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Referrer URL"
+          },
+          {
+            "name": "user_agent",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "User agent string"
+          },
+          {
+            "name": "ip_address",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Client IP address (may be anonymized)"
+          },
+          {
+            "name": "device_type",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Device type (mobile, desktop, tablet)"
+          }
+        ]
+      },
+      "doc": "Contextual information about the event"
+    },
+    {
+      "name": "metadata",
+      "type": {
+        "type": "record",
+        "name": "EventMetadata",
+        "fields": [
+          {
+            "name": "source",
+            "type": "string",
+            "doc": "Source system that produced the event"
+          },
+          {
+            "name": "version",
+            "type": "string",
+            "default": "1.0.0",
+            "doc": "Schema version"
+          },
+          {
+            "name": "correlation_id",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Correlation ID for distributed tracing"
+          },
+          {
+            "name": "ingested_at",
+            "type": ["null", {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Timestamp when event was ingested"
+          }
+        ]
+      },
+      "doc": "Event metadata for tracing and lineage"
+    }
+  ]
+}

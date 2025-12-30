@@ -1,0 +1,17 @@
+# Iceberg Configuration - Base Defaults
+iceberg:
+  catalog_type: "${DP_ICEBERG_CATALOG_TYPE:rest}"
+  catalog_uri: "${DP_ICEBERG_CATALOG_URI:http://localhost:8181}"
+  warehouse: "${DP_ICEBERG_WAREHOUSE:s3://warehouse/}"
+
+  # Table defaults
+  table_defaults:
+    format_version: 2
+    write_format: "parquet"
+    compression: "zstd"
+
+  # Maintenance settings
+  maintenance:
+    expire_snapshots_older_than_days: 7
+    delete_orphan_files_older_than_days: 3
+    rewrite_data_files_target_size_mb: 512

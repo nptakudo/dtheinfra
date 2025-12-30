@@ -1,0 +1,38 @@
+# Local Development Environment Configuration
+environment: local
+debug: true
+
+# S3/MinIO configuration for local development
+s3:
+  endpoint_url: "http://localhost:9000"
+  access_key_id: "minioadmin"
+  secret_access_key: "minioadmin"
+  bucket_bronze: "bronze"
+  bucket_silver: "silver"
+  bucket_gold: "gold"
+  region: "us-east-1"
+
+# Kafka configuration for local development
+kafka:
+  bootstrap_servers: "localhost:29092"
+  schema_registry_url: "http://localhost:8081"
+  security_protocol: "PLAINTEXT"
+
+# Iceberg configuration for local development
+iceberg:
+  catalog_type: "rest"
+  catalog_uri: "http://localhost:8181"
+  warehouse: "s3://warehouse/"
+
+# Database configuration
+database:
+  host: "localhost"
+  port: 5432
+  database: "dataplatform"
+  username: "dataplatform"
+  password: "dataplatform"
+
+# Logging configuration
+logging:
+  level: "DEBUG"
+  format: "console"

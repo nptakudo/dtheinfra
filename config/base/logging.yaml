@@ -1,0 +1,21 @@
+# Logging Configuration - Base Defaults
+logging:
+  level: "${DP_LOG_LEVEL:INFO}"
+  format: "json"  # json or console
+
+  # Structlog configuration
+  processors:
+    - add_log_level
+    - timestamp
+    - service_context
+    - format_exc_info
+
+  # Per-module log levels
+  module_levels:
+    dp_core: "INFO"
+    dp_connectors: "INFO"
+    dp_quality: "INFO"
+    urllib3: "WARNING"
+    kafka: "WARNING"
+    boto3: "WARNING"
+    botocore: "WARNING"
