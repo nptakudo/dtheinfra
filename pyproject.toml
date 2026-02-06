@@ -7,6 +7,7 @@ requires-python = ">=3.11"
 authors = [{ name = "Data Platform Team" }]
 dependencies = [
     "acryl-datahub>=1.3.1.10",
+    "pyiceberg[gcsfs,pyarrow]>=0.8.1",
 ]
 
 [tool.uv.workspace]

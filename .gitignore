@@ -100,3 +100,9 @@ logs/
 *.key
 credentials.json
 secrets.yaml
+
+# Mintlify
+.mintlify/
+node_modules/
+package-lock.json
+yarn.lock

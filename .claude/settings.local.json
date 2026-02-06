@@ -15,7 +15,12 @@
       "Bash(xargs:*)",
       "Bash(ls:*)",
       "WebFetch(domain:www.e6data.com)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(docker network create:*)",
+      "Bash(chmod:*)",
+      "Bash(/Users/takudo/Documents/dtheinfra/infra/verify-integration.sh:*)",
+      "Bash(python3 -m json.tool:*)",
+      "Bash(git add:*)"
     ]
   }
 }

@@ -196,9 +196,120 @@ docker compose down -v
 ./start-datahub.sh
 ```
 
+## Iceberg Integration
+
+DataHub can ingest metadata from Apache Iceberg tables managed by the Iceberg catalog component.
+
+### Prerequisites
+
+1. **Start Iceberg Catalog** (must be running first):
+   ```bash
+   cd infra/iceberg-catalog/dev
+   ./start-catalog.sh
+   ```
+
+2. **Start DataHub**:
+   ```bash
+   cd infra/datahub/dev
+   ./start-datahub.sh
+   ```
+
+Both components join the `dtheinfra-network` for cross-component communication.
+
+### Seeding Sample Tables
+
+Create sample Iceberg tables for testing:
+
+```bash
+# Install dependencies
+uv sync
+
+# Run seed script
+uv run python infra/datahub/dev/seed_iceberg_tables.py
+```
+
+This creates three sample tables:
+- `bronze.raw_events` - Raw event data
+- `silver.cleaned_events` - Processed events
+- `gold.user_metrics` - Aggregated metrics
+
+### Running Ingestion
+
+Ingest Iceberg metadata into DataHub:
+
+```bash
+uv run datahub ingest -c infra/datahub/dev/recipes/iceberg_ingestion.yml
+```
+
+The ingestion will:
+1. Connect to the Iceberg REST catalog at `http://localhost:8181`
+2. Discover all namespaces (bronze, silver, gold)
+3. Read table schemas, properties, and statistics
+4. Push metadata to DataHub GMS
+
+### Verification
+
+1. **Check DataHub UI**: Open http://localhost:9002
+2. **Search for tables**: Search "raw_events", "cleaned_events", "user_metrics"
+3. **Verify metadata**: Check schemas, properties, partition specs
+
+### Schema Evolution Testing
+
+To test that schema changes propagate:
+
+```python
+# Add a column to a table
+from pyiceberg.catalog import load_catalog
+from pyiceberg.types import NestedField, StringType
+
+catalog = load_catalog(
+    "local_lakehouse",
+    **{"type": "rest", "uri": "http://localhost:8181"}
+)
+
+table = catalog.load_table("silver.cleaned_events")
+with table.update_schema() as update:
+    update.add_column("source_system", StringType())
+
+# Re-run ingestion
+# uv run datahub ingest -c infra/datahub/dev/recipes/iceberg_ingestion.yml
+
+# Verify new column appears in DataHub UI
+```
+
+### Troubleshooting
+
+**Ingestion fails with connection error:**
+```bash
+# Verify Iceberg catalog is running
+curl http://localhost:8181/v1/config
+
+# Check both services are on dtheinfra-network
+docker network inspect dtheinfra-network
+```
+
+**Tables not appearing in DataHub:**
+```bash
+# Check ingestion logs
+uv run datahub ingest -c infra/datahub/dev/recipes/iceberg_ingestion.yml --debug
+
+# Verify tables exist in catalog
+curl http://localhost:8181/v1/namespaces
+```
+
+**GCS authentication errors (when seeding):**
+```bash
+# Verify GCP credentials are set
+echo $GOOGLE_APPLICATION_CREDENTIALS
+
+# Or set explicitly
+export GCP_SA_KEY_PATH=/path/to/service-account-key.json
+```
+
 ## Resources
 
 - [DataHub Documentation](https://docs.datahub.com/)
+- [DataHub Iceberg Integration](https://docs.datahub.com/docs/generated/ingestion/sources/iceberg/)
 - [DataHub Quickstart Guide](https://docs.datahub.com/docs/quickstart)
 - [DataHub Docker Deployment](https://docs.datahub.com/docs/docker)
 - [DataHub GitHub](https://github.com/datahub-project/datahub)
@@ -208,6 +319,6 @@ docker compose down -v
 
 1. Explore the UI at http://localhost:9002
 2. Set up metadata ingestion from your data sources
-3. Configure lineage tracking for Spark/Airflow jobs
+3. Configure lineage tracking for Spark/Airflow jobs (via OpenLineage)
 4. Define data ownership and governance policies
 5. Set up data quality rules and monitors
