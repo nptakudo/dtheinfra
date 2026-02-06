@@ -212,4 +212,6 @@ docker logs dp-minio-init
 
 - Read the [Architecture Overview](../architecture/data-flow.md)
 - Explore the [ADRs](../architecture/adr/) for key design decisions
+- Set up [Google Cloud Storage](../architecture/google-cloud-storage.md) for Iceberg lakehouse
+- Review [GCS Operations Guide](../operations/gcs-operations.md) for storage setup
 - Check out example DAGs in `apps/orchestration/dags/`
