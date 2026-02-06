@@ -2,7 +2,20 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "WebFetch(domain:datahubproject.io)",
+      "WebFetch(domain:docs.datahub.com)",
+      "WebFetch(domain:github.com)",
+      "mcp__acp__Write",
+      "mcp__acp__Bash",
+      "mcp__acp__Edit",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:medium.com)",
+      "Bash(xargs:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:www.e6data.com)",
+      "Bash(done)"
     ]
   }
 }

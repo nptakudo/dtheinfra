@@ -5,7 +5,9 @@ description = "End-to-end data platform with Lambda architecture"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Data Platform Team" }]
-dependencies = []
+dependencies = [
+    "acryl-datahub>=1.3.1.10",
+]
 
 [tool.uv.workspace]
 members = [
