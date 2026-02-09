@@ -82,7 +82,7 @@ Users set `GCP_SA_KEY_PATH` in `.env` (gitignored).
 
 ## Lifecycle Scripts
 
-### start-<component>.sh
+### `start-<component>.sh`
 
 Standard pattern:
 
@@ -121,7 +121,7 @@ docker compose up -d
 echo "✅ <Component> is ready!"
 ```
 
-### stop-<component>.sh
+### `stop-<component>.sh`
 
 Standard pattern:
 

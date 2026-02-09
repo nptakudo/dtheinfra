@@ -40,16 +40,12 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "README",
-        "infra/QUICKSTART",
-        "docs/development/getting-started"
-      ]
+      "pages": ["home", "infra/QUICKSTART", "docs/development/getting-started"]
     },
     {
       "group": "Architecture",
       "pages": [
-        "docs/architecture/README",
+        "docs/architecture/overview",
         "docs/architecture/google-cloud-storage",
         "docs/architecture/gcs-visual-guide",
         "infra/COMPONENT_PATTERN",
@@ -65,7 +61,15 @@
     {
       "group": "Development",
       "pages": [
-        "docs/development/getting-started"
+        "docs/development/getting-started",
+        {
+          "group": "Plans",
+          "pages": ["plans/plan"]
+        },
+        {
+          "group": "Tasks",
+          "pages": ["tasks/todo", "tasks/lessons"]
+        }
       ]
     },
     {
@@ -81,60 +85,46 @@
         {
           "group": "Data Storage & Catalog",
           "pages": [
-            "infra/iceberg-catalog/README",
-            "infra/hive-metastore/README"
+            "infra/iceberg-catalog/overview",
+            "infra/hive-metastore/overview"
           ]
         },
         {
           "group": "Data Processing",
           "pages": [
-            "infra/spark/README",
-            "infra/flink/README",
-            "infra/dbt/README"
+            "infra/spark/overview",
+            "infra/flink/overview",
+            "infra/dbt/overview"
           ]
         },
         {
           "group": "Streaming & Messaging",
-          "pages": [
-            "infra/kafka/README"
-          ]
+          "pages": ["infra/kafka/overview"]
         },
         {
           "group": "Orchestration & Workflows",
-          "pages": [
-            "infra/airflow/README",
-            "infra/temporal/README"
-          ]
+          "pages": ["infra/airflow/overview", "infra/temporal/overview"]
         },
         {
           "group": "Query & Analytics",
-          "pages": [
-            "infra/trino/README",
-            "infra/superset/README"
-          ]
+          "pages": ["infra/trino/overview", "infra/superset/overview"]
         },
         {
           "group": "Metadata & Governance",
-          "pages": [
-            "infra/datahub/README"
-          ]
+          "pages": ["infra/datahub/overview"]
         },
         {
           "group": "Observability",
-          "pages": [
-            "infra/datadog/README",
-            "infra/kibana/README"
-          ]
+          "pages": ["infra/datadog/overview", "infra/kibana/overview"]
         },
         {
           "group": "Security & DevOps",
-          "pages": [
-            "infra/vault/README"
-          ]
+          "pages": ["infra/vault/overview"]
         }
       ]
     }
   ],
+
   "footerSocials": {
     "github": "https://github.com/nptakudo/dtheinfra",
     "linkedin": "https://www.linkedin.com/company/example"

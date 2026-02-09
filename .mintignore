@@ -1,0 +1,8 @@
+# Avoid parsing virtualenv/tooling files as docs
+.venv/
+.uv/
+node_modules/
+
+# Mint ignores README.md by default; include our docs README files
+!README.md
+!**/README.md

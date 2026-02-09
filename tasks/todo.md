@@ -159,3 +159,17 @@ Manual verification steps (requires GCS credentials):
 - Plan: `/Users/takudo/Documents/dtheinfra/plans/plan.md`
 - Lakekeeper: https://docs.lakekeeper.io/
 - DataHub Iceberg: https://docs.datahub.com/docs/generated/ingestion/sources/iceberg/
+
+## Task: Fix Mint dev startup and navigation errors (2026-02-09)
+
+### Plan
+- [x] Confirm root causes from current Mint output (`.venv` parsing + navigation mismatches + MDX tag parse)
+- [x] Update Mint docs configuration and ignore rules with minimal-impact changes
+- [x] Fix MDX-invalid heading in `infra/COMPONENT_PATTERN.md`
+- [x] Run `mint validate` to confirm errors are gone
+- [x] Document results in review notes
+
+### Review
+- Root causes verified: Mint parsed `.venv` markdown, README navigation targets were ignored, and two `<component>` heading tokens in `infra/COMPONENT_PATTERN.md` broke MDX parsing.
+- Fixes applied: added `.mintignore`, created non-README entry pages (`home.md` and per-component `overview.md`), updated `mint.json` navigation to target those entries, and escaped heading tokens in `infra/COMPONENT_PATTERN.md`.
+- Verification: `~/.bun/bin/mint validate` now exits 0 with `success build validation passed`.
