@@ -1,3 +1,8 @@
+---
+title: "Documentation Guide"
+description: "Guide for maintaining and contributing to DTHEINFRA documentation using Mintlify."
+---
+
 # Documentation Guide
 
 > **Mintlify** is the documentation system for this project. All docs are version-controlled in this monorepo and published via Mintlify.
@@ -6,7 +11,7 @@
 
 ```
 dtheinfra/
-├── mint.json                    # Mintlify configuration
+├── docs.json                    # Mintlify configuration (required)
 ├── README.md                    # Project overview (homepage)
 ├── docs/                        # Main documentation
 │   ├── architecture/            # Architecture guides and ADRs
@@ -26,16 +31,16 @@ dtheinfra/
 
 ### Prerequisites
 
-Install Mintlify CLI:
+Install Mintlify CLI (requires Node.js v20.17.0+):
 ```bash
-bun add -g mintlify
+npm i -g mint
 ```
 
 ### Preview Documentation
 
 Run the development server:
 ```bash
-mintlify dev
+mint dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -43,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-mintlify build
+mint build
 ```
 
 ## Publishing
@@ -70,7 +75,7 @@ Documentation is automatically deployed to Mintlify when changes are pushed to t
    touch infra/component-name/README.md
    ```
 
-2. Add the page to `mint.json` navigation:
+2. Add the page to `docs.json` navigation under the appropriate group:
    ```json
    {
      "group": "Architecture",
@@ -80,7 +85,7 @@ Documentation is automatically deployed to Mintlify when changes are pushed to t
    }
    ```
 
-3. Preview changes locally with `mintlify dev`
+3. Preview changes locally with `mint dev`
 
 ## Documentation Best Practices
 
@@ -120,7 +125,7 @@ See the [Getting Started Guide](/docs/development/getting-started)
 
 ## Configuration
 
-The `mint.json` file controls:
+The `docs.json` file controls:
 - Navigation structure
 - Branding (logo, colors)
 - Features (search, dark mode, feedback)
@@ -131,19 +136,29 @@ The `mint.json` file controls:
 
 ### Local Preview Not Working
 
-1. Check Node.js version: `node --version` (requires Node 14+)
-2. Reinstall Mintlify: `bun add -g mintlify`
-3. Clear cache: `rm -rf .mintlify`
+1. Check Node.js version: `node --version` (requires Node 20.17.0+)
+2. Reinstall CLI: `npm i -g mint`
+3. Clear cache: `rm -rf ~/.mintlify`
 
 ### Missing Pages
 
-Verify the file path in `mint.json` matches the actual file location (without `.md` extension).
+Verify the file path in `docs.json` matches the actual file location (without `.md` extension).
 
 ### Broken Links
 
 Run link checking:
 ```bash
-mintlify broken-links
+mint broken-links
+```
+
+For accessibility checks:
+```bash
+mint a11y
+```
+
+Validate the documentation build:
+```bash
+mint validate
 ```
 
 ## Resources

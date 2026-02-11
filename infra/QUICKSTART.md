@@ -1,3 +1,8 @@
+---
+title: "Quick Start"
+description: "Get up and running with the Iceberg + DataHub integration POC."
+---
+
 # Iceberg + DataHub Integration - Quick Start Guide
 
 This guide walks you through the complete setup of the Iceberg + DataHub integration POC.
