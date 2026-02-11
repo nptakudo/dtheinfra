@@ -1,3 +1,17 @@
+## Documentation
+> **Mintlify** is the documentation system for this project. Docs live in `docs/` and `infra/`; see `docs/DOCS.md` for the guide.
+- After adding docs to folder `docs/` remember to update mintlify setup in `mint.json` to include the new docs.
+- For any markdown file that are not in `docs/` folder, remember to add that file to the `mint.json` file under ToBeReviewed group.
+```json
+{
+  "navigation": [
+    {
+      "group": "ToBeReviewed",
+      "pages": ["AGENTS"]
+    }
+  ]
+}
+```
 ## Workflow Orchestration
 
 ### 1. Plan Mode Default

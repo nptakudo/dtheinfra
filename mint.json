@@ -40,7 +40,7 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["home", "infra/QUICKSTART", "docs/development/getting-started"]
+      "pages": ["home", "docs/DOCS", "infra/QUICKSTART", "docs/development/getting-started"]
     },
     {
       "group": "Architecture",
@@ -122,6 +122,10 @@
           "pages": ["infra/vault/overview"]
         }
       ]
+    },
+    {
+      "group": "ToBeReviewed",
+      "pages": ["AGENTS", "CLAUDE"]
     }
   ],
 

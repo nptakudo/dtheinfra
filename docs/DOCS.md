@@ -1,6 +1,6 @@
 # Documentation Guide
 
-This project uses [Mintlify](https://mintlify.com) for documentation publishing. The documentation is organized as a monorepo with all content under version control.
+> **Mintlify** is the documentation system for this project. All docs are version-controlled in this monorepo and published via Mintlify.
 
 ## Documentation Structure
 
@@ -28,7 +28,7 @@ dtheinfra/
 
 Install Mintlify CLI:
 ```bash
-npm i -g mintlify
+bun add -g mintlify
 ```
 
 ### Preview Documentation
@@ -132,7 +132,7 @@ The `mint.json` file controls:
 ### Local Preview Not Working
 
 1. Check Node.js version: `node --version` (requires Node 14+)
-2. Reinstall Mintlify: `npm i -g mintlify`
+2. Reinstall Mintlify: `bun add -g mintlify`
 3. Clear cache: `rm -rf .mintlify`
 
 ### Missing Pages
