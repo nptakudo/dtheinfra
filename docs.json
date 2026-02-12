@@ -1,0 +1,139 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "DTHEINFRA",
+  "description": "End-to-end data platform with Lambda architecture (batch + streaming), built on AWS with a Lakehouse foundation (S3 + Apache Iceberg).",
+  "logo": {
+    "dark": "/logo/loogo.svg",
+    "light": "/logo/loogo.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": false
+  },
+  "navbar": {
+    "links": [
+      {"label": "Support", "href": "mailto:support@example.com"}
+    ],
+    "primary": {
+      "type": "github",
+      "label": "GitHub",
+      "href": "https://github.com/nptakudo/dtheinfra"
+    }
+  },
+  "navigation": {
+    "global": {
+      "anchors": [
+        {"anchor": "GitHub", "icon": "github", "href": "https://github.com/nptakudo/dtheinfra"},
+        {"anchor": "Community", "icon": "slack", "href": "https://example.com/community"}
+      ]
+    },
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": ["home", "docs/DOCS", "infra/QUICKSTART", "docs/development/getting-started"]
+      },
+      {
+        "group": "Architecture",
+        "pages": [
+          "docs/architecture/overview",
+          "docs/architecture/google-cloud-storage",
+          "docs/architecture/gcs-visual-guide",
+          "infra/COMPONENT_PATTERN",
+          {
+            "group": "Architecture Decision Records",
+            "pages": [
+              "docs/architecture/adr/0001-use-iceberg-as-table-format",
+              "docs/architecture/adr/0002-use-gcs-for-storage"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Development",
+        "pages": [
+          "docs/development/getting-started",
+          {
+            "group": "Plans",
+            "pages": ["plans/plan"]
+          },
+          {
+            "group": "Tasks",
+            "pages": ["tasks/todo", "tasks/lessons"]
+          }
+        ]
+      },
+      {
+        "group": "Operations",
+        "pages": ["docs/operations/gcs-operations", "docs/operations/gcs-quick-reference"]
+      },
+      {
+        "group": "Infrastructure Components",
+        "pages": [
+          {
+            "group": "Data Storage & Catalog",
+            "pages": ["infra/iceberg-catalog/overview", "infra/hive-metastore/overview"]
+          },
+          {
+            "group": "Data Processing",
+            "pages": ["infra/spark/overview", "infra/flink/overview", "infra/dbt/overview"]
+          },
+          {
+            "group": "Streaming & Messaging",
+            "pages": ["infra/kafka/overview"]
+          },
+          {
+            "group": "Orchestration & Workflows",
+            "pages": ["infra/airflow/overview", "infra/temporal/overview"]
+          },
+          {
+            "group": "Query & Analytics",
+            "pages": ["infra/trino/overview", "infra/superset/overview"]
+          },
+          {
+            "group": "Metadata & Governance",
+            "pages": ["infra/datahub/overview"]
+          },
+          {
+            "group": "Observability",
+            "pages": ["infra/datadog/overview", "infra/kibana/overview"]
+          },
+          {
+            "group": "Security & DevOps",
+            "pages": ["infra/vault/overview"]
+          }
+        ]
+      },
+      {
+        "group": "ToBeReviewed",
+        "pages": ["AGENTS", "CLAUDE"]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/nptakudo/dtheinfra",
+      "linkedin": "https://www.linkedin.com/company/example"
+    }
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "search": {
+    "prompt": "Search documentation..."
+  },
+  "seo": {
+    "indexing": "navigable"
+  },
+  "metadata": {
+    "timestamp": true
+  }
+}

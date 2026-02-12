@@ -1,0 +1,61 @@
+networks:
+  default:
+    name: iceberg_catalog_network
+  dtheinfra:
+    external: true
+    name: dtheinfra-network
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: iceberg-catalog-postgres
+    environment:
+      POSTGRES_USER: lakekeeper
+      POSTGRES_PASSWORD: lakekeeper
+      POSTGRES_DB: lakekeeper
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lakekeeper"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - default
+
+  lakekeeper:
+    image: quay.io/lakekeeper/lakekeeper:latest
+    container_name: iceberg-catalog-lakekeeper
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8181:8181"
+    environment:
+      # Database configuration
+      - LAKEKEEPER__PG_DATABASE_URL=postgresql://lakekeeper:lakekeeper@postgres:5432/lakekeeper
+
+      # GCS configuration
+      - LAKEKEEPER__WAREHOUSE_LOCATION=${GCS_WAREHOUSE_URI:-gs://dtheinfra-lakehouse/warehouse/}
+      - GOOGLE_APPLICATION_CREDENTIALS=/secrets/gcs-key.json
+
+      # Server configuration
+      - LAKEKEEPER__LISTEN_PORT=8181
+      - LAKEKEEPER__LISTEN_HOST=0.0.0.0
+
+      # Logging
+      - RUST_LOG=${RUST_LOG:-info}
+    volumes:
+      - ${GCP_SA_KEY_PATH:-~/.config/gcloud/application_default_credentials.json}:/secrets/gcs-key.json:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8181/v1/config"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - default
+      - dtheinfra
+
+volumes:
+  postgres_data:

@@ -1,0 +1,39 @@
+# DataHub Iceberg Ingestion Recipe
+#
+# This recipe ingests metadata from the Iceberg REST catalog (Lakekeeper)
+# into DataHub for centralized discovery and governance.
+#
+# Usage:
+#   uv run datahub ingest -c infra/datahub/dev/recipes/iceberg_ingestion.yml
+
+source:
+  type: iceberg
+  config:
+    # Iceberg catalog configuration
+    catalog:
+      local_lakehouse:
+        type: rest
+        uri: http://localhost:8181
+        warehouse: gs://dtheinfra-lakehouse/warehouse/
+
+    # Platform instance for namespacing in DataHub
+    platform_instance: local_lakehouse
+
+    # Optional: Filter specific databases/tables
+    # database_pattern:
+    #   allow:
+    #     - "bronze.*"
+    #     - "silver.*"
+    #     - "gold.*"
+
+    # Optional: Profiling configuration (can be expensive on large tables)
+    # profiling:
+    #   enabled: true
+    #   profile_table_level_only: true
+
+sink:
+  type: datahub-rest
+  config:
+    server: http://localhost:8080
+    # Optional: Add authentication if DataHub auth is enabled
+    # token: "${DATAHUB_TOKEN}"
